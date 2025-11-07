@@ -1,9 +1,9 @@
 package com.daviaugusto.controle_assinaturas.entidades;
 
 import com.daviaugusto.controle_assinaturas.enums.CicloFaturamento;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 
 import java.util.ArrayList;
@@ -18,13 +18,13 @@ public class Plano {
     private String nome;
     private Double preco;
     private CicloFaturamento cicloFaturamento;
-    @OneToMany(mappedBy = "plano")
-    private List<Assinaturas> assinaturas = new ArrayList<>();
+    @OneToMany(mappedBy = "plano", cascade = CascadeType.ALL)
+    private List<Assinatura> assinaturas = new ArrayList<>();
 
     public Plano() {
     }
 
-    public Plano(UUID id, String nome, Double preco, CicloFaturamento cicloFaturamento, List<Assinaturas> assinaturas) {
+    public Plano(UUID id, String nome, Double preco, CicloFaturamento cicloFaturamento, List<Assinatura> assinaturas) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
@@ -64,11 +64,11 @@ public class Plano {
         this.cicloFaturamento = cicloFaturamento;
     }
 
-    public List<Assinaturas> getAssinaturas() {
+    public List<Assinatura> getAssinaturas() {
         return assinaturas;
     }
 
-    public void setAssinaturas(List<Assinaturas> assinaturas) {
+    public void setAssinaturas(List<Assinatura> assinaturas) {
         this.assinaturas = assinaturas;
     }
 }

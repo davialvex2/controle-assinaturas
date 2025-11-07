@@ -1,6 +1,7 @@
 package com.daviaugusto.controle_assinaturas.entidades;
 
 import com.daviaugusto.controle_assinaturas.enums.StatusEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -10,11 +11,12 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
-public class Assinaturas {
+public class Assinatura {
 
     @Id
     private UUID id;
     @ManyToOne
+    @JsonIgnore
     @JoinColumn(name = "plano_id")
     private Plano plano;
     private String emailCliente;
@@ -22,10 +24,10 @@ public class Assinaturas {
     private LocalDate proximoPagamento;
 
 
-    public Assinaturas() {
+    public Assinatura() {
     }
 
-    public Assinaturas(UUID id, Plano plano, String emailCliente, StatusEnum status, LocalDate proximoPagamento) {
+    public Assinatura(UUID id, Plano plano, String emailCliente, StatusEnum status, LocalDate proximoPagamento) {
         this.id = id;
         this.plano = plano;
         this.emailCliente = emailCliente;
