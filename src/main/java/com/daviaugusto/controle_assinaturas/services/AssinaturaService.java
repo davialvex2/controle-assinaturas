@@ -5,6 +5,7 @@ import com.daviaugusto.controle_assinaturas.dtos.AssinaturaDTO;
 import com.daviaugusto.controle_assinaturas.dtos.AssinaturaResponseDTO;
 import com.daviaugusto.controle_assinaturas.entidades.Assinatura;
 import com.daviaugusto.controle_assinaturas.entidades.Plano;
+import com.daviaugusto.controle_assinaturas.enums.CicloFaturamento;
 import com.daviaugusto.controle_assinaturas.enums.StatusEnum;
 import com.daviaugusto.controle_assinaturas.repositories.AssinaturaRepository;
 import com.daviaugusto.controle_assinaturas.repositories.PlanoRepository;
@@ -52,5 +53,15 @@ public class AssinaturaService {
         assinaturaDTO.setDiasRestantes(dias);
         assinaturaRepository.deleteById(assinatura.getId());
         return assinaturaDTO;
+    }
+
+    public void atualizarDataPagamento(UUID idAssinatura){
+        Assinatura assinatura = assinaturaRepository.findById(idAssinatura).orElseThrow(() -> new RuntimeException("Assinatura não encontrada"));
+        if(assinatura.getPlano().getCicloFaturamento().equals(CicloFaturamento.ANUAL)){
+            assinatura.setProximoPagamento(LocalDate.now().plusYears(1L));
+        }
+        else{
+            assinatura.setProximoPagamento(LocalDate.now().plusMonths(1L));
+        }
     }
 }
