@@ -31,4 +31,6 @@ public class AssinaturaDTO {
     public void setEmailCliente(String emailCliente) {
         this.emailCliente = emailCliente;
     }
+
+
 }

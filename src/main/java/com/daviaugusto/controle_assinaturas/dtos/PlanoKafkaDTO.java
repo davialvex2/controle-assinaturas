@@ -1,38 +1,24 @@
-package com.daviaugusto.controle_assinaturas.entidades;
+package com.daviaugusto.controle_assinaturas.dtos;
 
 import com.daviaugusto.controle_assinaturas.enums.CicloFaturamento;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
-@Entity
-public class Plano {
+public class PlanoKafkaDTO {
 
-    @Id
     private UUID id;
     private String nome;
     private Double preco;
     private CicloFaturamento cicloFaturamento;
-    @JsonManagedReference
-    @OneToMany(mappedBy = "plano", cascade = CascadeType.ALL)
-    private List<Assinatura> assinaturas = new ArrayList<>();
 
-    public Plano() {
+    public PlanoKafkaDTO() {
     }
 
-    public Plano(UUID id, String nome, Double preco, CicloFaturamento cicloFaturamento, List<Assinatura> assinaturas) {
+    public PlanoKafkaDTO(UUID id, String nome, Double preco, CicloFaturamento cicloFaturamento) {
         this.id = id;
         this.nome = nome;
         this.preco = preco;
         this.cicloFaturamento = cicloFaturamento;
-        this.assinaturas = assinaturas;
     }
 
     public UUID getId() {
@@ -65,13 +51,5 @@ public class Plano {
 
     public void setCicloFaturamento(CicloFaturamento cicloFaturamento) {
         this.cicloFaturamento = cicloFaturamento;
-    }
-
-    public List<Assinatura> getAssinaturas() {
-        return assinaturas;
-    }
-
-    public void setAssinaturas(List<Assinatura> assinaturas) {
-        this.assinaturas = assinaturas;
     }
 }

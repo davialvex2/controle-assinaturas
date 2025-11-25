@@ -1,38 +1,28 @@
-package com.daviaugusto.controle_assinaturas.entidades;
+package com.daviaugusto.controle_assinaturas.dtos;
 
 import com.daviaugusto.controle_assinaturas.enums.StatusEnum;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
 
 import java.time.LocalDate;
 import java.util.UUID;
 
-@Entity
-public class Assinatura {
+public class AssinaturaKafkaDTO {
 
-    @Id
+
     private UUID id;
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "plano_id")
-    private Plano plano;
     private String emailCliente;
-    @Enumerated(EnumType.STRING)
     private StatusEnum status;
     private LocalDate proximoPagamento;
+    private PlanoKafkaDTO plano;
 
-
-    public Assinatura() {
+    public AssinaturaKafkaDTO() {
     }
 
-    public Assinatura(UUID id, Plano plano, String emailCliente, StatusEnum status, LocalDate proximoPagamento) {
+    public AssinaturaKafkaDTO(UUID id, String emailCliente, StatusEnum status, LocalDate proximoPagamento, PlanoKafkaDTO plano) {
         this.id = id;
-        this.plano = plano;
         this.emailCliente = emailCliente;
         this.status = status;
         this.proximoPagamento = proximoPagamento;
+        this.plano = plano;
     }
 
     public UUID getId() {
@@ -41,14 +31,6 @@ public class Assinatura {
 
     public void setId(UUID id) {
         this.id = id;
-    }
-
-    public Plano getPlano() {
-        return plano;
-    }
-
-    public void setPlano(Plano plano) {
-        this.plano = plano;
     }
 
     public String getEmailCliente() {
@@ -73,5 +55,13 @@ public class Assinatura {
 
     public void setProximoPagamento(LocalDate proximoPagamento) {
         this.proximoPagamento = proximoPagamento;
+    }
+
+    public PlanoKafkaDTO getPlano() {
+        return plano;
+    }
+
+    public void setPlano(PlanoKafkaDTO plano) {
+        this.plano = plano;
     }
 }

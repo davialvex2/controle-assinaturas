@@ -4,6 +4,7 @@ import com.daviaugusto.controle_assinaturas.dtos.AssinaturaDTO;
 import com.daviaugusto.controle_assinaturas.dtos.AssinaturaResponseDTO;
 import com.daviaugusto.controle_assinaturas.entidades.Assinatura;
 import com.daviaugusto.controle_assinaturas.services.AssinaturaService;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class AssinaturaController {
 
 
     @PostMapping
-    public ResponseEntity<Assinatura> criarAssinatura(@RequestBody AssinaturaDTO assinaturaDTO){
+    public ResponseEntity<Assinatura> criarAssinatura(@RequestBody AssinaturaDTO assinaturaDTO) throws JsonProcessingException {
         return ResponseEntity.ok(assinaturaService.criarAssinatura(assinaturaDTO));
     }
 
